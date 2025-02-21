@@ -1,3 +1,4 @@
 node_modules
 pnpm-lock.yaml
 packages/reactivity/dist
+!/packages/reactivity/dist/index.html
