@@ -17,12 +17,13 @@
       app.innerHTML = `${state.name}, ${state.age}`
       console.log('effect run end~ ');
     })
-    // effect(() => {
-    //   app.innerHTML = `${state.age}`
-    // })
+    effect(() => {
+      app.innerHTML = `${state.age}`
+    })
     setTimeout(() => {
+      console.log('setTimeout call')
       state.age++
-    }, 2000);
+    }, 5000);
 
     
   </script>

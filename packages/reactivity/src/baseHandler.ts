@@ -6,7 +6,7 @@ export enum ReactiveFlags {
 
 export const mutableHandlers: ProxyHandler<any> = {
   get(target, key, receiver) {
-    console.log(key, 'get');
+    console.log('get', key);
     if(key === ReactiveFlags.IS_REACTIVE) {
       return true
     }
@@ -15,7 +15,7 @@ export const mutableHandlers: ProxyHandler<any> = {
     return Reflect.get(target, key, receiver)
   },
   set(target, key, value, receiver) {
-    console.log(key, 'set');
+    console.log('set', key);
 
     let oldValue = target[key]
     let result = Reflect.set(target, key, value, receiver);

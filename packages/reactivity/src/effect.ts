@@ -18,7 +18,7 @@ class ReactiveEffect {
   constructor(public fn, public scheduler) {}
   
   run() {
-    console.log('effect run');
+    console.log('effect run', this.fn);
     
     if(!this.active) {
       return this.fn();
@@ -30,14 +30,14 @@ class ReactiveEffect {
     }finally{
       activeEffect = lastEffect
     }
-
-
   }
 }
 
 export function trackEffect(effect, dep) {
-  dep.set(effect, effect._trackId)
-  effect.deps[effect._depsLength++] = dep
+  //这里做特判, 避免set时重复track
+  if(!dep.get(effect)) dep.set(effect, effect._trackId)
+  if(!effect.deps.includes(dep)) effect.deps[effect._depsLength++] = dep
+  console.log(`effect_id -> ${effect.id}有${effect._depsLength}个dep需要更新`)
 }
 
 export function triggerEffects(dep) {
